@@ -1,0 +1,1 @@
+INSERT INTO "public"."Depositos" ("id_deposito", "nombre") VALUES ('1', 'Depósito General'), ('2', 'Salón de Ventas');
