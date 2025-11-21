@@ -29,7 +29,7 @@ AS $$
 BEGIN
   IF NEW.id_estado <> OLD.id_estado AND NEW.id_estado = 4 THEN
     UPDATE public."Stock" s
-    SET cantidad_confirmada = cantidad_confirmada + pd.cantidad
+    SET cantidad_confirmada = cantidad_confirmada + pd.cantidad, cantidad_disponible = cantidad_disponible - cantidad_confirmada
     FROM public."PedidoDetalles" pd
     WHERE pd.id_pedido = NEW.id_pedido
         AND s.id_producto = pd.id_producto
@@ -42,7 +42,7 @@ $$;
 CREATE OR REPLACE FUNCTION validar_modificacion_presupuesto()
 RETURNS TRIGGER AS $$
 BEGIN
-    IF OLD.id_estado != 2 THEN
+    IF OLD.id_estado != 1 THEN
         RAISE EXCEPTION 'No se puede modificar un presupuesto que no está en estado Emitido';
     END IF;
     

@@ -51,7 +51,7 @@ SELECT
 FROM "Presupuestos" p
 INNER JOIN "Clientes" c ON c.id_cliente = p.id_cliente
 INNER JOIN "EstadosPresupuesto" ep ON ep.id_estado = p.id_estado
-WHERE ep.nombre = 'Pendiente' 
+WHERE ep.id_estado = 8 
 ORDER BY p.fecha_emision DESC;
 /*
 Informe de presupuestos rechazados, desplegar los atributos: Presupuesto, fecha,
@@ -75,7 +75,7 @@ INNER JOIN "EstadosPresupuesto" ep ON ep.id_estado = p.id_estado
 INNER JOIN "Motivos" m ON m.id_motivo = p.id_motivo
 INNER JOIN "PresupuestoDetalles" pd ON pd.id_presupuesto = p.id_presupuesto
 INNER JOIN "Productos" prod ON prod.id_producto = pd.id_producto
-WHERE ep.nombre = 'Rechazado' 
+WHERE ep.is_estado = 4 
 ORDER BY p.fecha_emision DESC;
 /*
 Ranking de productos (Productos con mas pedidos confirmados, por cantidad de
